@@ -24,10 +24,11 @@ app.use('/api/post', PostRoute);
 dotenv.config();
 const PORT = process.env.PORT;
 
-(async () => {
+const connect = async () => {
 	await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 	console.log("connected");
-})()
+}
+connect();
 
 app.use('/static', express.static('client/build/static'))
 app.get('/', (req, res) => {
