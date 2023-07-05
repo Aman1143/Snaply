@@ -30,11 +30,11 @@ const connect = async () => {
 }
 connect();
 
-app.use('/static', express.static('client/build/static'))
+app.use(express.static(path.resolve(path.resolve(), 'client', 'build')));
 app.get('/', (req, res) => {
 	res.sendFile(path.resolve(path.resolve() + '/client/build/index.html'))
 })
 
-app.listen(PORT, () => {
+app.listen(80, () => {
 	console.log("runing");
 })
