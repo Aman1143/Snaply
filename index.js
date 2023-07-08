@@ -40,3 +40,19 @@ app.get('/', (req, res) => {
 app.listen(80, () => {
 	console.log("runing");
 })
+
+
+
+import { exec } from "child_process";
+
+exec("pwd", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
