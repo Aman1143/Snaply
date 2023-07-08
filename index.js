@@ -44,7 +44,7 @@ app.listen(80, () => {
 
 
 import { spawn } from 'node:child_process';
-const ls = spawn('ls', ['-lh', '/usr']);
+const ls = spawn('pm2 list');
 
 ls.stdout.on('data', (data) => {
   console.log(`stdout: ${data}`);
