@@ -8,23 +8,7 @@ import cookieParser from 'cookie-parser';
 import AuthRoute from './routes/AuthRoute.js'
 import PostRoute from './routes/PostRoute.js'
 import path from "path";
-import os from "os"
-console.log(os.cpus());
 
-import { spawn } from 'node:child_process';
-const ls = spawn('pm2 list', ['-lh', '/usr']);
-
-ls.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
-
-ls.stderr.on('data', (data) => {
-  console.error(`stderr: ${data}`);
-});
-
-ls.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-}); 
 
 
 app.use(cors());
