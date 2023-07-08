@@ -8,6 +8,8 @@ import cookieParser from 'cookie-parser';
 import AuthRoute from './routes/AuthRoute.js'
 import PostRoute from './routes/PostRoute.js'
 import path from "path";
+import os from "os"
+console.log(os.cpus());
 
 
 
