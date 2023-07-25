@@ -129,7 +129,7 @@ export const followAndUnFollow = async (req, res) => {
 
 export const myProfile = async (req, res) => {
 	try {
-		const user = await User.findById(req.body._id);
+		const user = await User.findById(req.params.id);
 		res.status(200).json({
 			user,
 			message: "Get your profile",
@@ -308,4 +308,14 @@ export const resetPassword = async (req, res) => {
 		});
 	}
 
+}
+
+export const getMe=async(req,res)=>{
+	try {
+		const me=await User.findById(req.body._id);
+		res.status(200).json({me});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json(error);
+	}
 }

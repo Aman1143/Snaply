@@ -13,12 +13,11 @@ export const createPost=(formData,navigate)=>async(dispatch)=>{
 	}
 }
 
-export const getAllpost=(navigate)=>async(dispatch)=>{
+export const getAllpost=(num)=>async(dispatch)=>{
 	dispatch({type:"GetAllPostRequest"});
 	try {
-		const {data}=await PostApi.getAllpost();
+		const {data}=await PostApi.getAllpost(num);
 	dispatch({type:"GetAllPostSuccess",payload:data});
-	navigate('../',{replace:true});
 	} catch (error) {
 		console.log(error) 
         dispatch({type:"GetAllPostFailure",payload:error.response.data.message});
@@ -51,10 +50,10 @@ export const addComment=(id,comment)=>async(dispatch)=>{
 	}
 }
  
-export const getMyPosts=()=>async(dispatch)=>{
+export const getMyPosts=(id)=>async(dispatch)=>{
 	dispatch({type:"GetMypostsRequest"});
 	try {
-		const {data}=await PostApi.getMyPosts();
+		const {data}=await PostApi.getMyPosts(id);
 		dispatch({type:"GetMypostsSuccess",payload:data});
 	} catch (error) {
 		console.log(error) 

@@ -10,14 +10,21 @@ import {useNavigate} from 'react-router-dom'
 import img1 from '../../image/avatar.png'
 import './NewPost.css'
 import { createPost, getAllpost } from '../../action/PostAction.js';
+import { getMe } from '../../action/AuthAction';
 
 
 const NewPost = () => {
   const [caption, setCaption] = useState('');
   const [image, setImage] = useState();
+  const {me}=useSelector((state)=>state.meUser);
+
   const [previewImage,setPreviewImage]=useState();
   const dispatch=useDispatch();
   const navigate=useNavigate();
+
+  useEffect(()=>{
+   dispatch(getMe());
+  },[dispatch])
 
 
   const handleImageChange = (e) => {
@@ -41,12 +48,12 @@ const NewPost = () => {
     <div className="newPostShare">
     <div className="PostShare">
       <img
-        src={img1}
+        src={me?.image.url}
         alt="Profile"
       />
       <div>
         <form onSubmit={handleSubmit}>
-          <input type="text" className='write_about' placeholder="What's happening?" name='caption' onChange={(e)=>setCaption(e.target.value)} value={caption} />
+          <input type="text" className='write_about' placeholder="write something..." name='caption' onChange={(e)=>setCaption(e.target.value)} value={caption} />
           <div className="postOptions">
             <label for='image' className="option" style={{ color: "var(--photo)" }} >
               <UilScenery />

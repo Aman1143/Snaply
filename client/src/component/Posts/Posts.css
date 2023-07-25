@@ -4,3 +4,23 @@
     gap: 1rem;
     margin-top: 10px;
 }
+.loadmore{
+    display: flex;
+    height: 100px;
+    margin: 10px;
+}
+.loadingbox{
+    display: flex;
+    animation: rotateme 1s linear  infinite  ;
+    font-size: 30px;
+    margin: auto;
+
+}
+@keyframes rotateme {
+   0%{
+    transform: rotate(0deg);
+   }
+   100%{
+    transform: rotate(360deg);
+   }
+}

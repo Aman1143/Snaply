@@ -4,62 +4,70 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import '../edit/EditProfile.css'
 import avatar from '../../image/avatar.png'
-import { editProfile, getMyProfile } from '../../action/AuthAction'
+import { editProfile, getMe, getMyProfile } from '../../action/AuthAction'
 import { getMyPosts } from '../../action/PostAction'
 import Myposts from '../myPosts/Myposts'
 
 
 const Profile = () => {
 	const dispatch = useDispatch();
-	const navigate=useNavigate();
-	const param=useParams();
+	const navigate = useNavigate();
+	const param = useParams();
 	const [edit, setEdit] = useState(false);
 	const { self } = useSelector((state) => state?.profile)
 	const { selfPosts } = useSelector((state) => state?.myPosts);
-	const {user}=useSelector((state)=>state?.user);
-	
-		const initialState = {
-			firstName: user?.firstName || "",
-			lastName: user?.lastName || "",
-			bio: user?.bio || "",
-			image:"",
-			ytlink:user?.ytlink || "",
-			fblink:user?.fblink || "",
-		  }; 
+	const { user } = useSelector((state) => state?.user);
+	const { me } = useSelector((state) => state.meUser);
+
+
+	const initialState = {
+		firstName: user?.firstName || "",
+		lastName: user?.lastName || "",
+		bio: user?.bio || "",
+		image: "",
+		ytlink: user?.ytlink || "",
+		fblink: user?.fblink || "",
+	};
 	const [data, setData] = useState(initialState);
-	const [img,setImg]=useState("");
+	const [img, setImg] = useState("");
 
 
-	  const handleImageChange=(e)=>{
+	const handleImageChange = (e) => {
 		const file = e.target.files[0];
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => {
-			  if (reader.readyState === 2) {
-				setData({...data,image:reader.result})
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			if (reader.readyState === 2) {
+				setData({ ...data, image: reader.result })
 				setImg(reader.result);
-			  }
 			}
-	  }
-	  const handleChnage = (e) => {
+		}
+	}
+	const handleChnage = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
-	  }
-
-	useEffect(() => {
-		dispatch(getMyProfile());
-		dispatch(getMyPosts());
-	}, [dispatch])
-
-	const handleEdit=(e)=>{
-		e.preventDefault();
-        dispatch(editProfile(data,navigate));
-		
 	}
 
-	if(self==null)
-	return;
-	if(selfPosts==null)
-	return;
+	useEffect(() => {
+		dispatch(getMyProfile(param.id));
+		dispatch(getMyPosts(param.id));
+		dispatch(getMe());
+	}, [dispatch])
+
+	useEffect(()=>{
+   console.log(self?._id);
+   console.log(me?._id);
+	},[])
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+		dispatch(editProfile(data, navigate));
+
+	}
+
+	if (self == null)
+		return;
+	if (selfPosts == null)
+		return;
 	return (
 		<>
 			{
@@ -69,7 +77,7 @@ const Profile = () => {
 							<i class="fas fa-times"></i>
 						</div>
 						<div class="formbold-form-wrapper">
-							<form  onSubmit={handleEdit}>
+							<form onSubmit={handleEdit}>
 								<div class="formbold-input-flex">
 									<div>
 										<label for="firstName" class="formbold-form-label">
@@ -137,7 +145,7 @@ const Profile = () => {
 								<div class="formbold-input-flex">
 									<div>
 										<div className="identy">
-											<label className='identy_label formbold-form-label cls' for="img"><span style={{ marginRight: '33px', fontSize: '14px', lineHeight: '14px', letterSpacing: '0.5px' }}>ProfileImage</span><img src={user.image.url} alt="" srcset="" /></label>
+											<label className='identy_label formbold-form-label cls' for="img"><span style={{ marginRight: '33px', fontSize: '14px', lineHeight: '14px', letterSpacing: '0.5px' }}>ProfileImage</span><img src={user?.image.url} alt="" srcset="" /></label>
 										</div>
 										<input type="file" name='img' hidden id='img' onChange={handleImageChange} style={{ display: 'none' }} />
 									</div>
@@ -156,25 +164,28 @@ const Profile = () => {
 							<span class="pro">PRO</span>
 							<img class="round" src={self?.image.url} alt="user" />
 							<h3>{self.username}</h3>
-							<a style={{ cursor: "pointer",display:'block' }}>{self?.fblink || "facebook"}</a>
+							<a style={{ cursor: "pointer", display: 'block' }}>{self?.fblink || "facebook"}</a>
 							<a style={{ cursor: "pointer" }}>{self?.ytlink || "youtube"}</a>
 							<p>{self.bio || "User interface designer and"}</p>
-							<div class="buttons">
-								<button class="primary" onClick={(e) => {setEdit(!edit)}} >
-									Edit
-								</button>
-
-							</div>
+							{
+								me?._id === self?._id && (
+									<div class="buttons">
+										<button class="primary" onClick={(e) => { setEdit(!edit) }} >
+											Edit
+										</button>
+									</div>
+								)
+							}
 							<div class="skills">
 								<div className="friend_heading">
-									<span style={{ cursor: "pointer" }}>{self?.posts.length} </span><span style={{ color: 'orange',cursor:'pointer' }}>Posts</span>
+									<span style={{ cursor: "pointer" }}>{self?.posts.length} </span><span style={{ color: 'orange', cursor: 'pointer' }}>Posts</span>
 								</div>
 								<div className="col_friend">
 									<div>
-										<span style={{ cursor: "pointer" }}>{self?.followers.length} </span><span className="followers" style={{ color: 'orange',cursor:'pointer' }}>Followers</span>
+										<span style={{ cursor: "pointer" }}>{self?.followers.length} </span><span className="followers" style={{ color: 'orange', cursor: 'pointer' }}>Followers</span>
 									</div>
 									<div className="following">
-										<span style={{ cursor: "pointer" }}>{self?.following.length} </span><span style={{ color: 'orange',cursor:'pointer' }}>Following</span>
+										<span style={{ cursor: "pointer" }}>{self?.following.length} </span><span style={{ color: 'orange', cursor: 'pointer' }}>Following</span>
 									</div>
 								</div>
 

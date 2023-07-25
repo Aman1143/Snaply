@@ -33,8 +33,11 @@ export const createPost = async (req, res) => {
 }
 
 export const getAllposts = async (req, res) => {
+	const {count}=req.query;
 	try {
-		const posts = await Post.find().sort({ createdAt: -1 }).populate('owner');
+		const posts = await Post.find().sort({ createdAt: -1 }).limit(count).populate('owner');
+		// if(count>posts.length)
+		// return res.status(200).json();
 		res.status(200).json({
 			posts,
 			message: "Get all posts",
@@ -46,6 +49,7 @@ export const getAllposts = async (req, res) => {
 		});
 	}
 };
+
 
 export const likeUnlike = async (req, res) => {
 	try {
@@ -104,7 +108,7 @@ export const addComment=async(req,res)=>{
 
 export const getMyposts=async(req,res)=>{
 	try {
-		const ownPosts=await Post.find({owner:{$in:req.body._id}}).sort({ createdAt: -1 });
+		const ownPosts=await Post.find({owner:{$in:req.params.id}}).sort({ createdAt: -1 });
 		res.status(200).json({
 			ownPosts,
 			message:"own posts",

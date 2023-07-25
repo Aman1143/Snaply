@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Search from '../search/Search'
 import Profile from '../profile/Profile'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,12 +6,16 @@ import { UilHome } from '@iconscout/react-unicons'
 import './LeftSide.css'
 import logo from '../../image/avatar.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../action/AuthAction'
+import { getMe, logout } from '../../action/AuthAction'
 
 const LeftSide = () => {
   const { user } = useSelector((state) => state.user)
-  const navigate=useNavigate();
+  const { me } = useSelector((state) => state.meUser);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMe());
+  }, [])
   const handleLogout = (e) => {
     dispatch(logout(navigate));
   }
@@ -44,13 +48,16 @@ const LeftSide = () => {
         </div>
         <div className="icon_logo">
           <div className="ic">
-            <img src={user?.image?.url || logo} className='svg1' alt="" />
+            <img src={me?.image?.url || logo} className='svg1' alt="" />
           </div>
           <div className="logo_about">
-            <Link to='/profile'><span style={{
-              fontSize: 'x-large',
-              fontWeight: 600
-            }}>Profile</span></Link>
+            <Link to={`/profile/${me?._id}`}>
+              <span style={{
+                fontSize: 'x-large',
+                fontWeight: 600
+              }}>Profile</span>
+            </Link>
+
           </div>
         </div>
         <div className="icon_logo">

@@ -86,6 +86,8 @@
 .write_about{
     outline: none;
     width: auto;
+    background: #bccfc4;
+    color: #4e5a64;
 }
 .newPostShare{
     position: relative;

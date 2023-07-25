@@ -6,28 +6,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addComment, deletePost, getAllpost, likeUnlike } from '../../action/PostAction'
 import { followAndUnFollow } from '../../action/AuthAction'
+import { getMe } from '../../api/AuthRequest';
 const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage, ownerName, ownerId, date}) => {
 	const timeago = moment(date).fromNow();
-	const { user, error } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const alert = useAlert();
+	const {me}=useSelector((state)=>state.meUser);
 	const [likes, setLikes] = useState(lkes);
 	const [cmts,setCmts]=useState(comments);
-	// const [folloBox,setFollowBox]=useState(followers);
-	// const [followingBox,setFollowingBox]=useState(user?.following);
 	const [isLike, setIsLike] = useState(false);
-	const [userLike, setUserLike] = useState(lkes.includes(user?._id));
+	const [userLike, setUserLike] = useState(lkes.includes(me?._id));
 	const [comment, setCommecnt] = useState("");
-	const [isDelete, setIsDelete] = useState(false)
-	const [following, setFollowing] = useState(user?.following?.includes(ownerId))
+	const [following, setFollowing] = useState(me?.following?.includes(ownerId))
+
+	useEffect(()=>{
+     getMe();
+	},[dispatch])
 
 	const handleLikeUnlike = (id) => {
 		setIsLike(!isLike);
 		if(userLike){
-			setLikes(likes.filter((l)=>l!=user?._id));
+			setLikes(likes.filter((l)=>l!=me?._id));
 		}else{
-			setLikes([...likes, user?._id]);
+			setLikes([...likes, me?._id]);
 			
 		}
 		setUserLike(()=>{
@@ -39,7 +41,7 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 	const handleComment = (e) => {
 		e.preventDefault();
 		console.log(cmts);
-		setCmts([...cmts,{user:user?._id,comment:comment}]);
+		setCmts([...cmts,{user:me?._id,comment:comment}]);
 		dispatch(addComment(postId, { comment: comment }, navigate));
 		console.log(cmts);
 		setCommecnt("");
@@ -52,30 +54,17 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 	const handleClick = (id) => {
 		dispatch(deletePost(id,navigate));
 	}
-	useEffect(() => {
-		if (error) {
-			alert.error(<div style={{ color: 'white' }}>{error}</div>);
-		}
-	}, []);
-
 	// useEffect(() => {
-	// 	likes.forEach((item) => {
-	// 		if (item._id === user._id) {
-	// 			setUserLike(true);
-	// 		}
-	// 	});
-	// 	if(userLike){
-	// 		console.log("User ne like kiya hu ajp")
-	// 	}else{
-	// 		console.log("user ne like naji kiya hai");
+	// 	if (error) {
+	// 		alert.error(<div style={{ color: 'white' }}>{error}</div>);
 	// 	}
-	// }, [likes, user._id]);
+	// }, []);
 
 	return (
 		<div class="post_card">
 			<div class="top">
 				<div class="post_info">
-					<a href='#' ><img src={ownerImage} alt="" /></a>
+					<a href={`/profile/${ownerId}`} ><img src={ownerImage} alt="" /></a>
 					<div class="user-name">
 						<p class="name">{ownerName}</p>
 						<p class="id">@workforwin</p>
@@ -83,7 +72,7 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 				</div>
 				<div class="icon">
 					{
-						ownerId !== user?._id && (
+						ownerId !== me?._id && (
 							<button className={following ? "button fc-button UnfollowButton" : "button fc-button"} onClick={() => handleFollowAndUnFollow(ownerId)}>
 								{following ? "Unfollow" : "Follow"}
 							</button>
@@ -125,7 +114,7 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 						<button type="submit">	<i class="far fa-paper-plane"></i></button>
 					</form>
 					{
-						ownerId === user?._id && (
+						ownerId === me?._id && (
 							<div className="delete">
 								<button onClick={() => handleClick(postId)}><i class="fas fa-trash"></i></button>
 							</div>

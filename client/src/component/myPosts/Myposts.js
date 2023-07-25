@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../profile/Profile.css'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { addComment, deletePost, likeUnlike } from '../../action/PostAction'
 import { useNavigate } from 'react-router-dom'
+import { getMe } from '../../action/AuthAction'
 
 
 const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage, ownerName, ownerId, date }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [likes, setLikes] = useState(lkes);
-	const { user } = useSelector((state) => state?.user);
+	const {me}=useSelector((state)=>state.meUser);
 	const timeago = moment(date).fromNow();
 	const [userLike, setUserLike] = useState(likes.includes(ownerId));
 	const [comment, setCommecnt] = useState("");
@@ -18,24 +19,24 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 	const [isLike, setIsLike] = useState(false);
 
 
-
+    useEffect(()=>{
+    getMe();
+	},[dispatch])
 	const handleClick = (id) => {
 		dispatch(deletePost(id))
 	}
 	const handleComment = (e) => {
 		e.preventDefault();
-		// console.log(cmts);
-		setCmts([...cmts, { user: user?._id, comment: comment }]);
+		setCmts([...cmts, { user: me?._id, comment: comment }]);
 		dispatch(addComment(postId, { comment: comment }));
-		// console.log(cmts);
 		setCommecnt("");
 	}
 	const handleLikeUnlike = (id) => {
 		setIsLike(!isLike);
 		if (userLike) {
-			setLikes(likes.filter((l) => l != user?._id));
+			setLikes(likes.filter((l) => l != me?._id));
 		} else {
-			setLikes([...likes, user?._id]);
+			setLikes([...likes, me?._id]);
 
 		}
 		setUserLike(() => {

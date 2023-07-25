@@ -142,3 +142,18 @@ export const searchReducer = createReducer(intialState, {
         state.error = action.payload;
     }
 }) 
+
+export const meReducers=createReducer(intialState,{
+    MeRequest:(state)=>{
+        state.loading=true;
+    },
+    MeSuccess:(state,action)=>{
+        state.loading=false;
+        state.me=action.payload.me;
+    },
+    MeFailure:(state,action)=>{
+        state.loading = false;
+        console.log(action.payload);
+        state.error = action.payload;
+    }
+})

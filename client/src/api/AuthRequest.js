@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API=axios;
+const API=axios.create({baseURL:'http://localhost:80'});
 
 export const signUp=(formData)=>API.post('/api/user/register',formData,{
 	headers: {
@@ -8,6 +8,11 @@ export const signUp=(formData)=>API.post('/api/user/register',formData,{
 	}
 });
 export const login=(formData)=>API.post('/api/user/login',formData,{
+	headers: {
+		Authorization: `JWT ${localStorage.getItem('token') || ""}`
+	}
+});
+export const getMe=()=>API.get('/api/user/me',{
 	headers: {
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}
@@ -25,7 +30,7 @@ export const getAllUser=()=>API.get(`/api/user/allUser`,{
 	}
 })
 
-export const getMyProfile=()=>API.get('/api/user/profile',{
+export const getMyProfile=(id)=>API.get(`/api/user/profile/${id}`,{
 	headers: {
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}

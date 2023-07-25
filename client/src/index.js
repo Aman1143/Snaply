@@ -10,7 +10,7 @@ import App from './App';
 
 const options = {
   position: positions.TOP_CENTER,
-  timeout: 5000,
+  timeout: 2000,
   offset: '30px',
   transition: transitions.SCALE
 }

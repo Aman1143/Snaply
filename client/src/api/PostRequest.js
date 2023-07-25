@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const API=axios;
+const API=axios.create({baseURL:'http://localhost:80'});;
 
 export const createPost=(formData)=>API.post('/api/post/createPost',formData,{
 	headers: {
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}
 });
-export const getAllpost=()=>API.get('/api/post/allpost',{
+export const getAllpost=(num)=>API.get(`/api/post/allpost?count=${num}`,{
 	headers: {
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}
@@ -23,7 +23,7 @@ export const addComment=(id,comment)=>API.post(`/api/post/addComment/${id}`,comm
 	}
 })
 
-export const getMyPosts=()=>API.get('/api/post/getOwnPost',{
+export const getMyPosts=(id)=>API.get(`/api/post/getOwnPost/${id}`,{
 	headers: {
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}

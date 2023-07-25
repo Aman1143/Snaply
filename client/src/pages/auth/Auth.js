@@ -47,7 +47,7 @@ const Auth = () => {
     if (error) {
       alert.error(<div style={{ color: 'white' }}>{error}</div>);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

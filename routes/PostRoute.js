@@ -7,6 +7,6 @@ router.post('/createPost',isAuthendicated,createPost);
 router.get('/allpost',isAuthendicated,getAllposts);
 router.get('/likeUnlike/:id',isAuthendicated,likeUnlike);
 router.post('/addComment/:id',isAuthendicated,addComment);
-router.get('/getOwnPost',isAuthendicated,getMyposts);
+router.get('/getOwnPost/:id',isAuthendicated,getMyposts);
 router.get('/deletePost/:id',isAuthendicated,deletePost);
 export default router;
