@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 	res.sendFile(path.resolve(path.resolve() + '/client/build/index.html'))
 })
 
-app.listen(80, () => {
+app.listen(4000, () => {
 	console.log("runing");
 
 })

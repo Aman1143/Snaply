@@ -36,8 +36,7 @@ export const getAllposts = async (req, res) => {
 	const {count}=req.query;
 	try {
 		const posts = await Post.find().sort({ createdAt: -1 }).limit(count).populate('owner');
-		// if(count>posts.length)
-		// return res.status(200).json();
+
 		res.status(200).json({
 			posts,
 			message: "Get all posts",

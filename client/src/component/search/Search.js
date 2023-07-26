@@ -55,11 +55,11 @@ const Search = () => {
             person.map((item)=>(
 				<div className="searchColom">
               <div>
-                <img
+               <a href={`/profile/${item._id}`}> <img
                   src={item.image?.url}
                   alt="profile"
                   className="followerImage"
-                />
+                /></a>
                 <div className="name">
                   <span>{item.username}</span>
                   <span>{item.bio}</span>

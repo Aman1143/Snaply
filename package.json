@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build":"npm i pm2 -g",
-    "start": "pm2 start index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
