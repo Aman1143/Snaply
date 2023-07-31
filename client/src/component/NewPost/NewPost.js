@@ -60,10 +60,7 @@ const NewPost = () => {
               Photo
             </label>
 
-            <label for='video' className="option" style={{ color: "var(--video)" }} >
-              <UilPlayCircle />
-              Video
-            </label>
+          
             <div className="option" style={{ color: "var(--location)" }}>
               <UilLocationPoint />
               Location

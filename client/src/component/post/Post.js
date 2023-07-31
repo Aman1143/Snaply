@@ -54,12 +54,6 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 	const handleClick = (id) => {
 		dispatch(deletePost(id,navigate));
 	}
-	// useEffect(() => {
-	// 	if (error) {
-	// 		alert.error(<div style={{ color: 'white' }}>{error}</div>);
-	// 	}
-	// }, []);
-
 	return (
 		<div class="post_card">
 			<div class="top">
