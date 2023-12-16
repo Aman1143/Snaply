@@ -4,7 +4,7 @@
 
 ## Description
 
-This is a MERN (MongoDB, Express.js, React.js, Node.js) social app that allows users to connect and share content with each other.It also uses yarn for fast compilation and storing in cloudnairy
+This is a MERN (MongoDB, Express.js, React.js, Node.js) social app that allows users to connect and share content with each other.It also uses yarn for fast compilation and uses  cloudnairy for image storation and uses react-redux,redux-toolkit for data globalazation.
 
 ## Features
 - **Dynamic Loading**: Only load more posts after viewing of old posts.
