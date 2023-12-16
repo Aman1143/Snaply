@@ -34,3 +34,14 @@ export const deletePost=(id)=>API.get(`/api/post/deletePost/${id}`,{
 		Authorization: `JWT ${localStorage.getItem('token') || ""}`
 	}
 })
+export const allUserLks=(id)=>API.get(`/api/post/allLikes/${id}`,{
+	headers: {
+		Authorization: `JWT ${localStorage.getItem('token') || ""}`
+	}
+})
+
+export const allCmts=(id)=>API.get(`/api/post/allCmts/${id}`,{
+	headers: {
+		Authorization: `JWT ${localStorage.getItem('token') || ""}`
+	}
+})

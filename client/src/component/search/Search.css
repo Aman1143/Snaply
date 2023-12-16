@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(106.23deg, #f99827, #f95f35 100%);
+  background: #658687c9;
   border-radius: 5px;
   padding: 4px;
   color: white;
@@ -70,4 +70,15 @@
   left: 10px;
   top: 5.8rem;
   height: 79vh;
+}
+.fa-search{
+  background:#658687c9 ;
+  font-size: x-large;
+}
+.buton{
+  height: 24px;
+}
+::placeholder {
+  color: #213d3ec9;
+  opacity: 1; 
 }

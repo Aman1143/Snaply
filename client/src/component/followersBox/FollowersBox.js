@@ -28,7 +28,7 @@ const FollowersBox = ({userId,username,profileImage}) => {
         /></a>
         <div className="name">
           <span>{username}</span>
-          <span>ppet</span>
+          <span style={{textTransform:"lowercase"}}>@{username}</span>
         </div>
       </div>
       <button className={ following ? "button fc-button UnfollowButton" : "button fc-button" } onClick={()=>handleFollowAndUnFollow(userId)}>

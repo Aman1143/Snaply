@@ -2,7 +2,7 @@
   max-width: 350px;
   background-color: #ffff;
   margin: auto;
-  /* margin-top: 10%; */
+  position: relative;
   border-radius: 5px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
 }
@@ -59,14 +59,15 @@
 
 .body,
 .bottom-section {
-  padding: 5px 15px;
+  padding: 5px 26px;
 }
 
 .body img {
-  max-height: 397px;
-  max-width: 300px;
+  height: 397px;
+  width: 300px;
   object-fit: cover;
   border-radius: 5px;
+  border: 2px solid #423d3d2e;
 }
 
 .body-icons {
@@ -124,4 +125,82 @@ p {
   display: flex;
   justify-content: space-between;
   margin-bottom: 7px;
+}
+
+.commentSection {
+  background: #fff;
+  position: absolute;
+  right: -62px;
+  bottom: 25px;
+  height: 20rem;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 2px solid #dbcdcd;
+  border-radius: 5px;
+  -webkit-box-shadow: -5px 3px 11px 0px rgba(119, 136, 138, 0.81);
+  -moz-box-shadow: -5px 3px 11px 0px rgba(119, 136, 138, 0.81);
+  box-shadow: -5px 3px 11px 0px rgba(119, 136, 138, 0.81),
+    5px 3px 11px 0px rgba(119, 136, 138, 0.81);
+}
+
+.cmt {
+  justify-content: center;
+  display: flex;
+  align-items: cne;
+  align-items: center;
+  margin: 10px;
+  font-weight: bolder;
+}
+
+.cmtBody {
+  display: flex;
+  flex-direction: row;
+  padding: 4px;
+}
+
+.nameCmt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.followerImages {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+}
+
+.cmtporfile {
+  width: 46px;
+}
+
+.username {
+  margin-bottom: 2px;
+  margin-left: 3px;
+  font-weight: 600;
+}
+
+.cmtContent {
+  margin-left: 7px;
+  font-size: small;
+}
+
+.cross {
+  position: absolute;
+  right: -5px;
+  top: -62px;
+}
+
+.cut {
+  font-size: larger;
+}
+
+.date {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: red;
+  font-size: xx-small;
 }

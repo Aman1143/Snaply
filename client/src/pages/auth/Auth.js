@@ -7,7 +7,7 @@ import { useAlert } from 'react-alert';
 import avatar from '../../image/avatar.png'
 
 const Auth = () => {
-  const { error } = useSelector((state) => state.user);
+  const {user, error } = useSelector((state) => state.user);
   const [isSignUp, setIsSignUp] = useState(true);
   const initialState = {
     username: "",
@@ -47,7 +47,7 @@ const Auth = () => {
     if (error) {
       alert.error(<div style={{ color: 'white' }}>{error}</div>);
     }
-  }, [dispatch]);
+  }, [user]);
 
   return (
     <>

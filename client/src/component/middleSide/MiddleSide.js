@@ -6,7 +6,6 @@ import './MiddleSide.css'
 const MiddleSide = () => {
   return (
 	<div className='MiddleSide'>
-		{/* <NewPost /> */}
 		<Posts />
 	</div>
   )

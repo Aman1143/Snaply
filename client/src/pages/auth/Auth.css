@@ -1,5 +1,6 @@
 .auth {
-  background-color: #080710;
+  background-color: #2a3e7ecc;
+;
   height: 51.5rem;
 }
 
@@ -21,15 +22,13 @@
 }
 
 .shape:first-child {
-  background: linear-gradient(#1845ad, #23a2f6);
+  background: linear-gradient(#1845ad, #95e4d5);
   left: -84px;
   top: -141px;
 }
 
 .shape:last-child {
-  background: linear-gradient(to right,
-      #ff512f,
-      #f09819);
+  background: linear-gradient(to right, #ff512f, #95d954);
   right: -78px;
   bottom: -72px;
 }
@@ -132,15 +131,18 @@
   padding: 5px;
   margin-top: 3px;
 }
-.error{
+
+.error {
   color: white;
-  
+
 }
-.identy{
-    margin: auto;
-    width: 12%
+
+.identy {
+  margin: auto;
+  width: 12%
 }
-.identy .identy_label img{
+
+.identy .identy_label img {
   width: 40px;
   height: 40px;
   border-radius: 50%;

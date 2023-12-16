@@ -7,6 +7,7 @@ import FollowersBox from '../followersBox/FollowersBox'
 const FollowersCard = () => {
   const [following, setFollowing] = useState(true)
   const {me}=useSelector((state)=>state.meUser);
+  const {loading}=useSelector((state)=>state.allUsers);
   let users=useSelector((state)=>{
     let a = state.allUsers;
     let us = a?.users?.filter((us)=>us._id!==me?._id); 
@@ -35,7 +36,16 @@ const FollowersCard = () => {
        />
       )})
     ):(
-      <h3>No one here</h3>
+      <>
+      { loading && (
+					<div className='loadmore'>
+						<div className='loadingbox'>
+							<i className='fas fa-spinner'></i>
+						</div>
+					</div>
+				)}
+      {!loading && <h3>No one here</h3>}
+      </>
     )
   }
     </div>

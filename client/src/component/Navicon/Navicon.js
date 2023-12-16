@@ -6,10 +6,10 @@ import { UilSetting } from "@iconscout/react-unicons";
 const Navicon = () => {
   return (
 	<div className='navIcons'>
-    <img src={logo} alt="" />
+    {/* <img src={logo} alt="" />
 	<UilSetting />
     <img src={logo} alt="" />
-	<img src={logo} alt="" />
+	<img src={logo} alt="" /> */}
 	</div>
   )
 }

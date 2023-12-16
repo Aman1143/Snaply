@@ -11,6 +11,7 @@ export const register = async (req, res) => {
 		const oldUser = await User.findOne({ email });
 		if (oldUser) return res.status(400).json({
 			message: "User already exists",
+			success:false
 		})
 		const salt = await bcrypt.genSalt(10);
 		const hashPassword = await bcrypt.hash(password, salt);
@@ -34,10 +35,13 @@ export const register = async (req, res) => {
 			token,
 			user,
 			message: "User Saved",
+			success:true
 		})
 	} catch (error) {
-		console.log(error)
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 
 
@@ -49,24 +53,32 @@ export const login = async (req, res) => {
 		const user = await User.findOne({ email }).select("+password");
 		if (!user) {
 			return res.status(404).json({
+				success:false,
 				message: "user not found",
 			});
 		}
 		const validity = await bcrypt.compare(password, user.password);
-		if (!validity) return res.status(403).json({
+		if (!validity) {
+			console.log("invalid credr")
+			return res.status(403).json({
 			message: "Invalid credensitial",
+			success:false
 		})
+	}
 		const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_KEY, {
 			expiresIn: 30 * 24 * 60 * 60 * 1000
 		});
 		res.status(200).json({
 			user,
 			token,
-			message: "User logged In"
+			message: "User logged In",
+			success:true,
 		})
 	} catch (error) {
-		console.log(error)
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -76,10 +88,13 @@ export const getAllUser = async (req, res) => {
 		res.status(200).json({
 			users,
 			message: "All user are here",
+			success:true
 		})
 	} catch (error) {
-		console.log(error)
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -122,8 +137,10 @@ export const followAndUnFollow = async (req, res) => {
 			});
 		}
 	} catch (error) {
-		console.log(error)
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -133,11 +150,14 @@ export const myProfile = async (req, res) => {
 		res.status(200).json({
 			user,
 			message: "Get your profile",
+			success:true,
 		})
 
 	} catch (error) {
-		console.log(error)
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -170,15 +190,21 @@ export const editProfile = async (req, res) => {
 			}
 		);
 		if (updatedUser.nModified === 0) {
-			throw new Error("Failed to update user profile");
+			res.status(403).json({
+				success: false,
+				message: "Failed to update user profile",
+			});
 		}
 		res.status(200).json({
 			user: updatedUser,
-			message: "Profile updated"
+			message: "Profile updated",
+			success:true
 		});
 	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -188,16 +214,20 @@ export const searchPerson=async(req,res)=>{
 		const searchedPerson = await User.find({ username: { $regex: query, $options: 'i' } });
 		if(!searchedPerson){
 			return res.status(403).json({
-				message:"Please enter correct username"
+				message:"Please enter correct username",
+				success:false
 			})
 		}
 	    res.status(200).json({
 			searchedPerson,
 			message:"Person found",
+			success:true,
 		})
 	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }
 
@@ -205,12 +235,13 @@ export const logout=async(req,res)=>{
 	try {
 	 req.headers.authorization=null;
 	 res.status(200).json({
-		 message:"user logout"
+		 message:"user logout",
+		 success:true
 	 })	
 	} catch (error) {
 	 res.status(500).json({
 		 success: false,
-		 message: error.message,
+		 message:"Internal server error"
 	 });
 	}
  }
@@ -255,14 +286,18 @@ export const logout=async(req,res)=>{
 
 			res.status(500).json({
 				success: false,
-				message: error.message,
+				message:"Internal server error"
 			});
 		}
-
+       res.status(200).json({
+             success:true,
+			 message:"done",
+	   })
+	   
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: error.message,
+			message:"Internal server error"
 		});
 	}
 }
@@ -289,22 +324,21 @@ export const resetPassword = async (req, res) => {
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 		user.password = hashPassword;
 		console.log("password has been changed")
-		console.log(hashPassword);
 
 		user.resetPasswordToken = undefined;
 		user.resetPasswordExpire = undefined;
 		await user.save();
-		console.log("user saved");
 		const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_KEY);
 		res.status(200).json({
 			user,
 			token,
+			success:true,
 			message: "Password updated"
 		})
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: error.message,
+			message: "Internal server error"
 		});
 	}
 
@@ -313,9 +347,11 @@ export const resetPassword = async (req, res) => {
 export const getMe=async(req,res)=>{
 	try {
 		const me=await User.findById(req.body._id);
-		res.status(200).json({me});
+		res.status(200).json({me,success:true,message:"I am here"});
 	} catch (error) {
-		console.log(error);
-		res.status(500).json(error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server Error",
+		});
 	}
 }

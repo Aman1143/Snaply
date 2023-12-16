@@ -79,3 +79,31 @@ export const myPostReducer=createReducer(intialState,{
 		state.error=action.payload;
 	}
 })
+
+export const userLksReducer=createReducer(intialState,{
+	AllUserLksRequest:(state)=>{
+		state.loading=true;
+	},
+	AllUserLksSuccess:(state,action)=>{
+		state.loading=false;
+		state.usrLks=action.payload;
+	},
+	AllUserLksFailure:(state,action)=>{
+		state.loading=false;
+		state.error=action.payload;
+	}
+})
+
+export const userCmtsReducer=createReducer(intialState,{
+	AllUserCmtsRequest:(state)=>{
+		state.loading=true;
+	},
+	AllUserCmtsSuccess:(state,action)=>{
+		state.loading=false;
+		state.userComments=action.payload;
+	},
+	AllUserCmtsFailure:(state,action)=>{
+		state.loading=false;
+		state.error=action.payload;
+	}
+})

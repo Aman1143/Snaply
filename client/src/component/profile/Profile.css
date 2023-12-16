@@ -1,103 +1,3 @@
-/* .profile_Page{
-  width: 32%;
-  margin: auto;
-}
-.ProfileCard{
-    border-radius: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    gap: 1rem;
-    overflow-x: clip;
-    background: var(--cardColor);
-	margin: 14px;
-	border: 2px solid orange;
-}
-
-.ProfileImages{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.ProfileImages>img:nth-of-type(1){
-    width: 100%;
-}
-
-.ProfileImages>img:nth-of-type(2)
-{
-    width: 6rem;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -3rem;
-    box-shadow: var(--profileShadow);
-}
-
-.ProfileName{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-    gap: 10px;
-}
-
-.ProfileName>span:nth-of-type(1)
-{
-    font-weight: bold;
-}
-
-.followStatus {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-  
-  .followStatus > hr {
-    width: 85%;
-    border: 1px solid var(--hrColor);
-  }
-  
-  .followStatus > div {
-    display: flex;
-    gap: 1rem;
-    width: 80%;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
-  .follow {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    align-items: center;
-    justify-content: center;
-  }
-  .follow > span:nth-of-type(1) {
-    font-weight: bold;
-  }
-  
-  .follow > span:nth-of-type(2) {
-    color: var(--gray);
-    font-size: 13px;
-  }
-  
-  .vl {
-    height: 150%;
-    border-left: 2px solid var(--hrColor);
-  }
-
-
-  .ProfileCard>span{
-      font-weight: bold;
-      color: orange;
-      align-self: center;
-      margin-bottom: 1rem;
-      cursor: pointer;
-  } */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .profile_page {
@@ -154,7 +54,7 @@
 }
 
 button.primary {
-  background-color: #03BFCB;
+  background-color:  #c8b8a961;;
   border: 1px solid #03BFCB;
   border-radius: 3px;
   color: #231E39;
@@ -195,6 +95,7 @@ button.primary.ghost {
 .your_posts {
   margin-top: 20px;
 }
+
 .bottom .enter {
   transform: rotate(56deg);
   position: absolute;
@@ -203,18 +104,12 @@ button.primary.ghost {
   top: 32%;
 }
 
-/* 
-.skills ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.skills ul li {
-	border: 1px solid #2D2747;
-	border-radius: 2px;
-	display: inline-block;
-	font-size: 12px;
-	margin: 0 7px 7px 0;
-	padding: 7px;
-} */
+.arrow{
+  width: 100px;
+  height: 100px;
+}

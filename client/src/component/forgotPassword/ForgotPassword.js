@@ -15,8 +15,8 @@ const ForgotPassword = () => {
   return (
 	<>
 		<div className="forgotPassword">
-			<form onSubmit={handleSubmit}>
-				<input type="email" name="email" required value={email} onChange={(e)=>setEmail(e.target.value)} />
+			<form onSubmit={handleSubmit} style={{background:"#b5d2d247"}}>
+				<input type="email" name="email" required value={email} onChange={(e)=>setEmail(e.target.value)} style={{backgroundColor:"#d4dce4"}} />
 				<button type="submit" className='btn'>Sent Token</button>
 			</form>
 		</div>

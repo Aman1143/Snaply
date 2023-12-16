@@ -61,10 +61,10 @@ const NewPost = () => {
             </label>
 
           
-            <div className="option" style={{ color: "var(--location)" }}>
-              <UilLocationPoint />
-              Location
-            </div>
+            <label for='video' className="option" style={{ color: "var(--photo)" }} >
+              <UilPlayCircle />
+              Video
+            </label>
             <div className="option" style={{ color: "var(--shedule)" }}>
               <UilSchedule />
               Shedule
@@ -72,9 +72,9 @@ const NewPost = () => {
             <div style={{ display: "none" }}>
               <input type="file" name='image' id='image' onChange={handleImageChange} />
             </div>
-            <div style={{ display: "none" }}>
-              <input type="file" name='video' id='video' />
-            </div>
+            {/* <div style={{ display: "none" }}>
+              <input type="file" name='video' id='video' accept="video/mp4, video/mov" />
+            </div> */}
             <button className="button ps-button" type='submit' >share</button>
           </div>
         </form>

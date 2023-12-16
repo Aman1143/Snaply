@@ -4,23 +4,19 @@
     gap: 1rem;
     margin-top: 10px;
 }
-.loadmore{
-    display: flex;
-    height: 100px;
-    margin: 10px;
+.circle{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #14146196;
+    margin-left: 7px;
+    animation-name: rotate;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    
 }
-.loadingbox{
-    display: flex;
-    animation: rotateme 1s linear  infinite  ;
-    font-size: 30px;
-    margin: auto;
-
-}
-@keyframes rotateme {
-   0%{
-    transform: rotate(0deg);
-   }
-   100%{
-    transform: rotate(360deg);
-   }
+@keyframes rotate{
+    from{ transform: rotate(-360deg); }
+    to{ transform: rotate(360deg); }
 }

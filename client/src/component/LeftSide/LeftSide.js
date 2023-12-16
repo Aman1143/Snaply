@@ -25,13 +25,10 @@ const LeftSide = () => {
         <Search />
         <div className="icon_logo">
           <div className="ic">
-            <UilHome className='svg' />
+          <i class="fas fa-home-lg-alt"></i>
           </div>
           <div className="logo_about">
-            <Link to='/'>   <span style={{
-              fontSize: 'x-large',
-              fontWeight: 600
-            }}>Home</span>
+            <Link to='/'>   <span className='heading'>Home</span>
             </Link>
           </div>
         </div>
@@ -40,10 +37,7 @@ const LeftSide = () => {
             <i class="fas fa-plus"></i>
           </div>
           <div className="logo_about">
-            <Link to='/newPost'><span style={{
-              fontSize: 'x-large',
-              fontWeight: 600
-            }}>Post</span></Link>
+            <Link to='/newPost'><span className='heading'>Post</span></Link>
           </div>
         </div>
         <div className="icon_logo">
@@ -52,10 +46,7 @@ const LeftSide = () => {
           </div>
           <div className="logo_about">
             <Link to={`/profile/${me?._id}`}>
-              <span style={{
-                fontSize: 'x-large',
-                fontWeight: 600
-              }}>Profile</span>
+              <span className='heading'>Profile</span>
             </Link>
 
           </div>
@@ -65,14 +56,7 @@ const LeftSide = () => {
             <i class="fas fa-sign-out-alt"></i>
           </div>
           <div className="logo_about">
-            <button style={{
-              fontSize: 'x-large',
-              fontWeight: 600,
-              color: 'darkblue',
-              borderBottom: '2px solid',
-              cursor: 'pointer',
-              backgroundColor: "transparent",
-            }} onClick={handleLogout}> <span >Logout</span></button>
+            <button  className='heading logout' onClick={handleLogout}> <span >Logout</span></button>
           </div>
         </div>
       </div>

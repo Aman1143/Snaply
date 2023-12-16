@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../profile/Profile.css'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
+import avatar from '../../image/avatar.png'
 import { addComment, deletePost, likeUnlike } from '../../action/PostAction'
 import { useNavigate } from 'react-router-dom'
 import { getMe } from '../../action/AuthAction'
@@ -11,7 +12,7 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [likes, setLikes] = useState(lkes);
-	const {me}=useSelector((state)=>state.meUser);
+	const { me } = useSelector((state) => state.meUser);
 	const timeago = moment(date).fromNow();
 	const [userLike, setUserLike] = useState(likes.includes(ownerId));
 	const [comment, setCommecnt] = useState("");
@@ -19,9 +20,9 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 	const [isLike, setIsLike] = useState(false);
 
 
-    useEffect(()=>{
-    getMe();
-	},[dispatch])
+	useEffect(() => {
+		getMe();
+	}, [dispatch])
 	const handleClick = (id) => {
 		dispatch(deletePost(id))
 	}
@@ -37,12 +38,11 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 			setLikes(likes.filter((l) => l != me?._id));
 		} else {
 			setLikes([...likes, me?._id]);
-
 		}
 		setUserLike(() => {
 			return !userLike;
 		});
-		dispatch(likeUnlike(id, navigate));
+		dispatch(likeUnlike(id));
 	}
 	return (
 		<>
@@ -50,23 +50,22 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 				<div class="post_card">
 					<div class="top">
 						<div class="post_info">
-							<a href="#" target="_blank"><img src={ownerImage} alt="" /></a>
+							<a href="#" target="_blank"><img src={ownerImage || avatar} alt="profileImage" /></a>
 							<div class="user-name">
 								<p class="name">{ownerName}</p>
-								<p class="id">@workforwin</p>
+								<p class="id">@{ownerName}</p>
 							</div>
-						</div>
-						<div class="icon">
-							<i class="fas fa-ellipsis-v"></i>
 						</div>
 					</div>
 					<div class="body">
-						<img src={postImage} alt="" style={{ marginLef: '33px' }} />
+						<div className="image">
+							<img src={postImage} alt="" style={{ marginLef: '33px' }} />
+						</div>
 						<div class="body-icons">
 							{
 								userLike ? (
 									<div className="like">
-										<i className="fas fa-heart" onClick={() => handleLikeUnlike(postId)}></i>
+										<i className="fas fa-heart" style={{ color: "red" }} onClick={() => handleLikeUnlike(postId)}></i>
 										<span style={{ paddingLeft: '5px' }}>{likes.length} likes</span>
 									</div>
 								) : (
@@ -86,7 +85,7 @@ const Myposts = ({ postId, caption, postImage, lkes = [], comments = [], ownerIm
 						<div class="sub-heading">
 							<h6>Time:<span>{timeago}</span></h6>
 						</div>
-						<p>{caption}</p>
+						<p># {caption}</p>
 						<div class="bottom">
 							<form onSubmit={handleComment}>
 								<input type="text" name='comment' onChange={(e) => setCommecnt(e.target.value)} placeholder="Add A Comment..." value={comment} />

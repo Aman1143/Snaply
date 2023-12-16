@@ -6,7 +6,6 @@ import Post from './component/post/Post';
 import Profile from './component/profile/Profile';
 import Auth from './pages/auth/Auth';
 import Home from './pages/home/Home';
-import Loading from './pages/loading/Loading';
 import { Routes, Route } from "react-router-dom"
 import NotFound from './component/notFound/NotFound';
 import ForgotPassword from './component/forgotPassword/ForgotPassword';
@@ -14,11 +13,9 @@ import ResetPassword from './component/resetPassword/ResetPassword';
 
 function App() {
   const token=JSON.stringify(localStorage.getItem('token'));
-  const {isAuthenticated}=useSelector((state)=>state.user);
   return (
      <>
       <Routes>
-        <Route path='/loading' element={<Loading />}/>
         <Route path='/edit' element={<EditProfile />}/>
         <Route path='/forgot/password' element={<ForgotPassword />} />
         <Route path='/api/user/password/reset/:token' element={<ResetPassword />}/>

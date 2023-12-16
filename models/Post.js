@@ -33,10 +33,14 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
 });
 
 const Post=new mongoose.model("Post",postSchema);
 
-export default Post
+export default Post;

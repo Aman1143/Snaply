@@ -153,7 +153,6 @@ export const meReducers=createReducer(intialState,{
     },
     MeFailure:(state,action)=>{
         state.loading = false;
-        console.log(action.payload);
         state.error = action.payload;
     }
 })

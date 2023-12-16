@@ -6,7 +6,6 @@ export const signUp = (formData, navigate) => async (dispatch) => {
         dispatch({ type: 'RegisterSuccess', payload: data });
         navigate('../', { replace: true });
     } catch (error) {
-        console.log(error)
         dispatch({ type: "RegisterFailure", payload: error.response.data.message });
     }
 }
@@ -17,8 +16,8 @@ export const login = (formData, navigate) => async (dispatch) => {
         const { data } = await AuthApi.login(formData);
         dispatch({ type: 'LoginSuccess', payload: data });
         navigate('../', { replace: true });
+
     } catch (error) {
-        console.log(error)
         dispatch({ type: "LoginFailure", payload: error.response.data.message });
     }
 }
@@ -49,10 +48,7 @@ export const followAndUnFollow = (id) => async (dispatch) => {
     try {
         const { data } = await AuthApi.followAndUnFollow(id);
         dispatch({ type: "followAndUnFollowSuccess", payload: data });
-        // navigate('../',{replace:true});
-
     } catch (error) {
-        console.log(error)
         dispatch({ type: "followAndUnFollowFailure", payload: error.response.data.message });
     }
 }
@@ -71,10 +67,13 @@ export const editProfile = (formData, navigate) => async (dispatch) => {
     dispatch({ type: "EditProfileRequest" });
     try {
         const { data } = await AuthApi.editProfile(formData);
-        dispatch({ type: "EditProfileSuccess", payload: data });
+        if (data.success) {
+            dispatch({ type: "EditProfileSuccess", payload: data });
+        } else {
+            dispatch({ type: "EditProfileFailure", payload: data.message });
+        }
         navigate('../', { replace: true });
     } catch (error) {
-        console.log(error)
         dispatch({ type: "EditProfileFailure", payload: error.response.data.message });
     }
 }
@@ -83,9 +82,12 @@ export const searchFriends = (query) => async (dispatch) => {
     dispatch({ type: "SearchRequest" });
     try {
         const { data } = await AuthApi.searchFriends(query);
-        dispatch({ type: "SearchSuccess", payload: data })
+        if (data.success) {
+            dispatch({ type: "SearchSuccess", payload: data })
+        } else {
+            dispatch({ type: "SearchFailure", payload: data.message });
+        }
     } catch (error) {
-        console.log(error)
         dispatch({ type: "SearchFailure", payload: error.response.data.message });
     }
 }

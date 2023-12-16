@@ -36,12 +36,12 @@ const Search = () => {
             type="text"
             name='search'
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="#Explore"
+            placeholder="@ Search"
             required
-            style={{ marginBottom: "10px", outline: 'none' }}
+            style={{ marginBottom: "10px", outline: 'none',background:"transparent" }}
           />
           <div className="s-icon">
-            <button type='submit'> <UilSearch /></button>
+            <button type='submit' className='buton'><i class="fas fa-search"></i></button>
           </div>
         </form>
       </div>
@@ -52,24 +52,24 @@ const Search = () => {
             <i className="fas fa-times"></i>
           </div>
           {person && person.length > 0 ? (
-            person.map((item)=>(
-				<div className="searchColom">
-              <div>
-               <a href={`/profile/${item._id}`}> <img
-                  src={item.image?.url}
-                  alt="profile"
-                  className="followerImage"
-                /></a>
-                <div className="name">
-                  <span>{item.username}</span>
-                  <span>{item.bio}</span>
+            person.map((item) => (
+              <div className="searchColom">
+                <div>
+                  <a href={`/profile/${item._id}`}> <img
+                    src={item.image?.url}
+                    alt="profile"
+                    className="followerImage"
+                  /></a>
+                  <div className="name">
+                    <span>{item.username}</span>
+                    <span>{item.bio}</span>
+                  </div>
                 </div>
+                <button className={following ? "button fc-button UnfollowButton" : "button fc-button"}>
+                  {following ? "Unfollow" : "Follow"}
+                </button>
               </div>
-              <button className={following ? "button fc-button UnfollowButton" : "button fc-button"}>
-                {following ? "Unfollow" : "Follow"}
-              </button>
-            </div>
-			))
+            ))
           ) : (
             <div className="notFound">
               <h3>User not found</h3>

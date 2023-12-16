@@ -86,12 +86,12 @@
 .write_about{
     outline: none;
     width: auto;
-    background: #bccfc4;
+    background: transparent;
     color: #4e5a64;
 }
 .newPostShare{
     position: relative;
     height: 100vh;
     width: 100vw;
-    background: #ede1d2;
+    background: #afd3e44a
 }
