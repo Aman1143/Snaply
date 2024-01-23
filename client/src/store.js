@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { allUserReducer, editProfileReducer, meReducers, profileReducer, searchReducer, userMessageReducer, userReducer } from "./reducers/AuthReducers";
 import { allMessageReducer, allPostReducer, myPostReducer, postReducer, userCmtsReducer, userLksReducer } from "./reducers/PostReducers";
+import { getConversationsReducer, getFriendsReducer, getMessageReducer, getSenderReducer } from "./reducers/ChatReducers";
 
 const store=configureStore({
 	reducer:{
@@ -17,6 +18,10 @@ const store=configureStore({
 		meUser:meReducers,
 		allUserlkes:userLksReducer,
         userComment:userCmtsReducer,
+		userMessage:getMessageReducer,
+		getSenDer:getSenderReducer,
+		getConversation:getConversationsReducer,
+		getFriEnds:getFriendsReducer,
 	}
 })
 

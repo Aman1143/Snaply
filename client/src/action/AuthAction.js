@@ -82,11 +82,7 @@ export const searchFriends = (query) => async (dispatch) => {
     dispatch({ type: "SearchRequest" });
     try {
         const { data } = await AuthApi.searchFriends(query);
-        if (data.success) {
             dispatch({ type: "SearchSuccess", payload: data })
-        } else {
-            dispatch({ type: "SearchFailure", payload: data.message });
-        }
     } catch (error) {
         dispatch({ type: "SearchFailure", payload: error.response.data.message });
     }

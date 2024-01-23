@@ -11,7 +11,7 @@ export const register = async (req, res) => {
 		const oldUser = await User.findOne({ email });
 		if (oldUser) return res.status(400).json({
 			message: "User already exists",
-			success:false
+			success: false
 		})
 		const salt = await bcrypt.genSalt(10);
 		const hashPassword = await bcrypt.hash(password, salt);
@@ -35,7 +35,7 @@ export const register = async (req, res) => {
 			token,
 			user,
 			message: "User Saved",
-			success:true
+			success: true
 		})
 	} catch (error) {
 		res.status(500).json({
@@ -53,7 +53,7 @@ export const login = async (req, res) => {
 		const user = await User.findOne({ email }).select("+password");
 		if (!user) {
 			return res.status(404).json({
-				success:false,
+				success: false,
 				message: "user not found",
 			});
 		}
@@ -61,10 +61,10 @@ export const login = async (req, res) => {
 		if (!validity) {
 			console.log("invalid credr")
 			return res.status(403).json({
-			message: "Invalid credensitial",
-			success:false
-		})
-	}
+				message: "Invalid credensitial",
+				success: false
+			})
+		}
 		const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_KEY, {
 			expiresIn: 30 * 24 * 60 * 60 * 1000
 		});
@@ -72,7 +72,7 @@ export const login = async (req, res) => {
 			user,
 			token,
 			message: "User logged In",
-			success:true,
+			success: true,
 		})
 	} catch (error) {
 		res.status(500).json({
@@ -88,7 +88,7 @@ export const getAllUser = async (req, res) => {
 		res.status(200).json({
 			users,
 			message: "All user are here",
-			success:true
+			success: true
 		})
 	} catch (error) {
 		res.status(500).json({
@@ -150,7 +150,7 @@ export const myProfile = async (req, res) => {
 		res.status(200).json({
 			user,
 			message: "Get your profile",
-			success:true,
+			success: true,
 		})
 
 	} catch (error) {
@@ -198,7 +198,7 @@ export const editProfile = async (req, res) => {
 		res.status(200).json({
 			user: updatedUser,
 			message: "Profile updated",
-			success:true
+			success: true
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -208,20 +208,20 @@ export const editProfile = async (req, res) => {
 	}
 }
 
-export const searchPerson=async(req,res)=>{
+export const searchPerson = async (req, res) => {
 	try {
 		const { query } = req.query
 		const searchedPerson = await User.find({ username: { $regex: query, $options: 'i' } });
-		if(!searchedPerson){
+		if (!searchedPerson) {
 			return res.status(403).json({
-				message:"Please enter correct username",
-				success:false
+				message: "Please enter correct username",
+				success: false
 			})
 		}
-	    res.status(200).json({
+		res.status(200).json({
 			searchedPerson,
-			message:"Person found",
-			success:true,
+			message: "Person found",
+			success: true,
 		})
 	} catch (error) {
 		res.status(500).json({
@@ -231,23 +231,23 @@ export const searchPerson=async(req,res)=>{
 	}
 }
 
-export const logout=async(req,res)=>{
+export const logout = async (req, res) => {
 	try {
-	 req.headers.authorization=null;
-	 res.status(200).json({
-		 message:"user logout",
-		 success:true
-	 })	
+		req.headers.authorization = null;
+		res.status(200).json({
+			message: "user logout",
+			success: true
+		})
 	} catch (error) {
-	 res.status(500).json({
-		 success: false,
-		 message:"Internal server error"
-	 });
+		res.status(500).json({
+			success: false,
+			message: "Internal server error"
+		});
 	}
- }
+}
 
 
- export const forgotPassword = async (req, res) => {
+export const forgotPassword = async (req, res) => {
 	try {
 		const { email } = req.body;
 		const user = await User.findOne({ email });
@@ -286,18 +286,18 @@ export const logout=async(req,res)=>{
 
 			res.status(500).json({
 				success: false,
-				message:"Internal server error"
+				message: "Internal server error"
 			});
 		}
-       res.status(200).json({
-             success:true,
-			 message:"done",
-	   })
-	   
+		res.status(200).json({
+			success: true,
+			message: "done",
+		})
+
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message:"Internal server error"
+			message: "Internal server error"
 		});
 	}
 }
@@ -318,12 +318,9 @@ export const resetPassword = async (req, res) => {
 				message: "Token is invalid or has expired",
 			});
 		}
-		console.log(user);
 		const salt = await bcrypt.genSalt(10);
-		console.log(req.body.password);
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 		user.password = hashPassword;
-		console.log("password has been changed")
 
 		user.resetPasswordToken = undefined;
 		user.resetPasswordExpire = undefined;
@@ -332,7 +329,7 @@ export const resetPassword = async (req, res) => {
 		res.status(200).json({
 			user,
 			token,
-			success:true,
+			success: true,
 			message: "Password updated"
 		})
 	} catch (error) {
@@ -344,14 +341,49 @@ export const resetPassword = async (req, res) => {
 
 }
 
-export const getMe=async(req,res)=>{
+export const getMe = async (req, res) => {
 	try {
-		const me=await User.findById(req.body._id);
-		res.status(200).json({me,success:true,message:"I am here"});
+		const me = await User.findById(req.body._id);
+		res.status(200).json({ me, success: true, message: "I am here" });
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({
 			success: false,
 			message: "Internal server Error",
 		});
+	}
+}
+
+export const getUser = async (req, res) => {
+	// console.log(req.params.id);
+	if (req.params.id==undefined) {
+		console.log("No param id");
+	}
+	try {
+		const user = await User.findById(req.params.id);
+		if (!user)
+			return res.status(404).json({
+				message: "No User"
+			})
+		// const {password,updatedAt,...other}=user._doc;
+		res.status(200).json({ user, message: "ok" });
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ error, message: "Internal Server Error" });
+	}
+}
+
+export const getFriends = async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id);
+		if (!user)
+			return res.json({
+				message: "No Usere"
+			})
+		const { password, updatedAt, ...other } = user._doc;
+		res.status(200).json(other);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
 	}
 }

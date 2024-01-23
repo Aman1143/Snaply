@@ -23,7 +23,7 @@ const FollowersCard = () => {
 
   return (
 	<div className="FollowersCard">
-  <h3>People you may know</h3>
+  <h3 style={{fontSize:"larger",fontWeight:"800"}}>People you may know !!</h3>
   {
     users && users.length >0 ?(
       users.map((item)=>{

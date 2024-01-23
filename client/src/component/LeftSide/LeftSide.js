@@ -25,7 +25,7 @@ const LeftSide = () => {
         <Search />
         <div className="icon_logo">
           <div className="ic">
-          <i class="fas fa-home-lg-alt"></i>
+            <i class="fas fa-home-lg-alt"></i>
           </div>
           <div className="logo_about">
             <Link to='/'>   <span className='heading'>Home</span>
@@ -53,10 +53,21 @@ const LeftSide = () => {
         </div>
         <div className="icon_logo">
           <div className="ic">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <div className="logo_about">
+            <Link to='/message'>
+              <span className='heading'>Message</span>
+            </Link>
+
+          </div>
+        </div>
+        <div className="icon_logo">
+          <div className="ic">
             <i class="fas fa-sign-out-alt"></i>
           </div>
           <div className="logo_about">
-            <button  className='heading logout' onClick={handleLogout}> <span >Logout</span></button>
+            <button className='heading logout' onClick={handleLogout}> <span >Logout</span></button>
           </div>
         </div>
       </div>

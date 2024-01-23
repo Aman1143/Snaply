@@ -1,0 +1,82 @@
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 10px;
+  margin-right: 14px;
+  border: 2px solid #83776359;
+  border-radius: 5px;
+}
+
+.chatBox {
+  width: 100%;
+}
+
+.svg {
+  margin-right: 11px;
+  width: 50px;
+  background: #7888969e;
+}
+
+.sender {
+  position: relative;
+}
+
+.input-group .far {
+  transform: rotate(56deg);
+  font-weight: 400;
+}
+
+.send {
+  position: absolute;
+  top: 7px;
+  right: 17px;
+  background: transparent;
+  border: none;
+}
+
+.header_bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header_btn {
+  display: flex;
+  flex-direction: row;
+  right: 0;
+  margin-right: 10;
+  margin-right: 23px;
+  gap: 1rem;
+}
+
+.header_img {
+  width: 2.5rem;
+  border-radius: 50%;
+  height: 2.5rem;
+}
+
+.boxes {
+  margin-right: 11px;
+  width: 50px;
+  background: #7888969e;
+}
+
+.header_dabba {
+  display: flex;
+  flex-direction: row;
+}
+
+.sender_img {
+  position: absolute;
+  right: 0;
+  top: -29px
+}
+
+.left_alone {
+  text-align: center;
+  font-size: x-large;
+  font-weight: 600;
+  color: #656563;
+}

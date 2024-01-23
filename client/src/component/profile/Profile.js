@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Profile.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useAlert } from 'react-alert';
 import '../edit/EditProfile.css'
 import avatar from '../../image/avatar.png'
 import { editProfile, getMe, getMyProfile } from '../../action/AuthAction'
@@ -13,6 +14,7 @@ const Profile = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const param = useParams();
+	const alert = useAlert();
 	const [edit, setEdit] = useState(false);
 	const { loading: profileLoading, self, error: profileError } = useSelector((state) => state?.profile);
 	const { user } = useSelector((state) => state?.user);

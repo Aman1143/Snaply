@@ -2,6 +2,7 @@ import Post from "../models/Post.js";
 import User from '../models/User.js'
 import cloudinary from '../utils/cloudinary.js'
 import mongoose from "mongoose";
+// import sharp from "sharp";
 
 export const createPost = async (req, res) => {
 	try {
@@ -66,7 +67,7 @@ export const likeUnlike = async (req, res) => {
 		if (!post) {
 			return res.status(404).json({
 				message: "Post Not found",
-				success:false,
+				success: false,
 			})
 		};
 		const userChk = await post.likes.includes(req.body._id);
@@ -99,7 +100,7 @@ export const addComment = async (req, res) => {
 		if (!post) {
 			return res.status(404).json({
 				message: "Post not found",
-				success:false,
+				success: false,
 			})
 		}
 		let date = new Date();
@@ -112,7 +113,7 @@ export const addComment = async (req, res) => {
 		await post.save();
 		return res.status(200).json({
 			message: "Comment added",
-			success:true,
+			success: true,
 		});
 
 	} catch (error) {
@@ -146,7 +147,7 @@ export const deletePost = async (req, res) => {
 		if (!post) {
 			return res.status(400).json({
 				message: "Post Not found ",
-				success:false
+				success: false
 			})
 		}
 		if (post.owner.toString() !== req.body._id.toString()) {
@@ -262,7 +263,7 @@ export const cmtShow = async (req, res) => {
 							},
 						]);
 
-						return { user:user, date: ele1.date, comment: ele1.comment };
+						return { user: user, date: ele1.date, comment: ele1.comment };
 					} catch (error) {
 						console.error('Error in user aggregation:', error);
 						return null;
@@ -279,7 +280,7 @@ export const cmtShow = async (req, res) => {
 		res.status(200).json({
 			success: true,
 			arr,
-			message:"comment shown"
+			message: "comment shown"
 		})
 	} catch (error) {
 		console.log(error)

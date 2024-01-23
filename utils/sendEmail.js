@@ -17,17 +17,11 @@ const sendEmail=async(options)=>{
 	to:options.email,
 	subject:options.subject,
 	text:options.message,
-	// from:"srl lab",
-	// to:"iit2021182@gmail.com",
-	// subject:"checking",
-	// text:"nfsfkk",
-	// html:`<h3> dfnidhf </h3>`
 	
 }
 
-console.log("Helpokpond")
 await transporter.sendMail(mailOptions);
-console.log("Send email");
+
 }
 
 export default sendEmail;

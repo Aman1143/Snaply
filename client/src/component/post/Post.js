@@ -6,8 +6,8 @@ import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addComment, allCmts, allUserLks, deletePost, likeUnlike } from '../../action/PostAction'
-import { followAndUnFollow } from '../../action/AuthAction'
-import { getMe } from '../../api/AuthRequest';
+import { followAndUnFollow, getMe } from '../../action/AuthAction'
+
 const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage, ownerName, ownerId, date }) => {
 	const timeago = moment(date).fromNow();
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Post = ({ postId, caption, postImage, lkes = [], comments = [], ownerImage
 	const [following, setFollowing] = useState(me?.following?.includes(ownerId))
 
 	useEffect(() => {
-		getMe();
+		dispatch(getMe());
 	}, [dispatch])
 
 	const handleLikeUnlike = (id) => {
