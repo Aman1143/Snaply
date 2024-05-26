@@ -3,14 +3,18 @@
 ![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic1.png?raw=true)
 
 ![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic2.png?raw=true)
+![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/video.png?raw=true)
 
 ## Description
 
 This is a MERN (MongoDB, Express.js, React.js, Node.js) social app that allows users to connect and share content with each other.It also uses yarn for fast compilation and uses  cloudnairy for image storation and uses react-redux,redux-toolkit for data globalazation.
 
 ## Features
-- **Dynamic Loading**: Only load more posts after viewing of old posts.
+- **Dynamic Loading**: Only load more posts after viewing of old posts (Infinite scrolling) .
 - **MongoDB with connect-mongo-session**: MongoDB is used as the database, and connect-mongo-session is used for session management.
+- **Peer To Peer chating**: Using socket.io and socket.io-client user can chat each other.
+- **Peer To Peer video calling**: Using socket.io and Peerjs(webrtc) user video chat each other.
+- **React Redux**: For global state managment .
 
 ## Installation
 
