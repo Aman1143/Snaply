@@ -20,7 +20,7 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) social app that allows u
 
 To run this app on your local machine, follow these steps:
 
-1. Clone the repository: clone this repo by `git clone https://github.com/Aman1143/INSTA_CLONE.git`
+1. Clone the repository: clone this repo by `git clone https://github.com/Aman1143/Snaply.git`
 
 
 2. Navigate to the project directory: Navigate to client folder to run client side code.
