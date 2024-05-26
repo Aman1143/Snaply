@@ -1,8 +1,9 @@
 # [MERN Social Media App]
 
 ![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic1.png?raw=true)
-
+- **chating**
 ![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic2.png?raw=true)
+- **Video chating**
 ![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/video.png?raw=true)
 
 ## Description
