@@ -8,8 +8,7 @@ const ChatConversation = ({ cnversation, currentUser, onlineUsers }) => {
   const { friends } = useSelector((state) => state.getFriEnds);
   useEffect(() => {
     const friendId = cnversation.members.find((m) => m !== currentUser._id);
-    dispatch(getFriends(friendId));
-    console.log(onlineUsers);
+    dispatch(getFriends(friendId)); 
   }, [currentUser, cnversation])
   return (
     <div style={{ border: "2px solid #d4d0c9", borderRadius: "5px" }} >

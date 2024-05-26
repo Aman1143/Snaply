@@ -53,14 +53,27 @@ io.on("connection", (socket) => {
 		let flag=true;
 		io.emit("userTyping",{flag,me}); 
 	})
-
+    
+	socket.on('base64 file',(document)=>{ 
+		console.log(document);
+		io.emit('base64 file',document);
+	})
+	
+	socket.on('join-room',(roomId,userId)=>{
+		socket.join(roomId);
+		socket.broadcast.emit('user-connected',userId)
+	})
 
 	socket.on("disconnect", (socket) => {
 		console.log("user left...")
 		removeUser(socket.id);
 		io.emit('getUsers', users);
 	})
+
+
 })
+
+
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb", extended: true }));

@@ -80,3 +80,10 @@
   font-weight: 600;
   color: #656563;
 }
+
+.imge {
+  position: absolute;
+  top: 7px;
+  left: 0;
+  background: transparent;
+}
