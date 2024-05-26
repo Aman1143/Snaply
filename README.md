@@ -1,6 +1,8 @@
 # [MERN Social Media App]
 
-![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/Screenshot%202023-12-16%20232419.png?raw=true)
+![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic1.png?raw=true)
+
+![image](https://github.com/Aman1143/INSTA_CLONE/blob/main/client/src/image/pic2.png?raw=true)
 
 ## Description
 
